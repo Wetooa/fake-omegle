@@ -4,14 +4,17 @@ import "normalize.css";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { ContextProvider } from "./context/SocketContext";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
+  <ContextProvider>
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </ContextProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function
