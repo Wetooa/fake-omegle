@@ -1,7 +1,3 @@
-import {
-  SocketContext,
-  ContextProvider,
-  useSocketContext,
-} from "./SocketContext";
+import { SocketContext, ContextProvider } from "./SocketContext";
 
-export { SocketContext, ContextProvider, useSocketContext };
+export { SocketContext, ContextProvider };

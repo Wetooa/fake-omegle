@@ -1,5 +1,7 @@
 import { Grid, Typography, Paper } from "@mui/material";
-import { useSocketContext } from "../../../context";
+import { useEffect, useState } from "react";
+import { useContext } from "react";
+import { SocketContext } from "../../../context";
 
 // more styles to tailwind the fuck out woheee
 /* 
@@ -22,13 +24,50 @@ import { useSocketContext } from "../../../context";
 */
 
 function VideoPlayer() {
+  const { name, callAccepted, callEnded, stream, call, myVideo, userVideo } =
+    useContext(SocketContext);
+
+  console.log(myVideo, userVideo);
+
   return (
-    <div>
-      VideoPlayer
-      <div className="w-[550px] xs:w-[300px]"> video </div>
-      <div className="justify-center xs:flex xs:flex-row"> gridContainer </div>
-      <div className="p-[10px] border-2 border-black m-[10px]"> paper </div>
-    </div>
+    <Grid container sx={{ justifyContent: "center" }}>
+      {stream && (
+        <Paper
+          sx={{ padding: "10px", border: "2px solid black", margin: "10px" }}
+        >
+          <Grid item xs={12} md={6}>
+            <Typography variant="h5" gutterBottom>
+              {name || "name"}
+            </Typography>
+            <video
+              playsInline
+              muted
+              ref={myVideo}
+              autoPlay
+              className="w-[550px] xs:w=[300px] scale-x-[-1]"
+            />
+          </Grid>
+        </Paper>
+      )}
+
+      {callAccepted && !callEnded && (
+        <Paper
+          sx={{ padding: "10px", border: "2px solid black", margin: "10px" }}
+        >
+          <Grid item xs={12} md={6}>
+            <Typography variant="h5" gutterBottom>
+              {call.name || "caller name"}
+            </Typography>
+            <video
+              playsInline
+              ref={userVideo}
+              autoPlay
+              className="w-[550px] xs:w=[300px] scale-x[-1]"
+            />
+          </Grid>
+        </Paper>
+      )}
+    </Grid>
   );
 }
 export default VideoPlayer;

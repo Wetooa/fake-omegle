@@ -16,28 +16,28 @@ const io = require("socket.io")(server, {
 
 app.use(cors());
 
-app.get("/", (req: Request, res: Response) => {
-  res.redirect(`/${uuidV4()}`);
-});
+// app.get("/", (req: Request, res: Response) => {
+//   res.redirect(`/${uuidV4()}`);
+// });
 
-app.get("/:room", (req: Request, res: Response) => {
-  res.send(`<h1>Server is running ${req.params.room}</h1>`);
-});
+// app.get("/:room", (req: Request, res: Response) => {
+//   res.send(`<h1>Server is running ${req.params.room}</h1>`);
+// });
 
 io.on("connection", (socket: Socket | any) => {
   socket.emit("me", socket.id);
 
   socket.on("disconnect", () => {
-    socket.broadcast.emit("call ended");
+    socket.broadcast.emit("callEnded");
   });
 
-  socket.on("calluser", (data: any) => {
+  socket.on("callUser", (data: any) => {
     const { userToCall, signalData, from, name } = data;
-    io.to(userToCall.emit("calluser", { signal: signalData, from, name }));
+    io.to(userToCall).emit("callUser", { signal: signalData, from, name });
   });
 
-  socket.on("answercall", (data: any) => {
-    io.to(data.to).emit("callaccepted", data.signal);
+  socket.on("answerCall", (data: any) => {
+    io.to(data.to).emit("callAccepted", data.signal);
   });
 });
 
