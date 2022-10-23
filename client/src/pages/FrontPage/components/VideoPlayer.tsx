@@ -27,8 +27,6 @@ function VideoPlayer() {
   const { name, callAccepted, callEnded, stream, call, myVideo, userVideo } =
     useContext(SocketContext);
 
-  console.log(myVideo, userVideo);
-
   return (
     <Grid container sx={{ justifyContent: "center" }}>
       {stream && (

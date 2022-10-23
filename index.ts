@@ -4,8 +4,12 @@ import "dotenv/config";
 import "colors";
 import { v4 as uuidV4 } from "uuid";
 import { Socket, SocketAddress } from "net";
+import path from "path";
 
 const app: Application = express();
+
+app.use(express.static(path.resolve(__dirname, "./client/build")));
+
 const server = require("http").createServer(app);
 const io = require("socket.io")(server, {
   cors: {

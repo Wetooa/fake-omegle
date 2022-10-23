@@ -6,7 +6,8 @@
   "scripts": {
     "runClient": "npm start --prefix ./client",
     "runServer": "nodemon index.ts --ignore client",
-    "dev": "concurrently npm run \"npm run runServer\" \"npm run runClient \""
+    "dev": "concurrently npm run \"npm run runServer\" \"npm run runClient \"",
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
